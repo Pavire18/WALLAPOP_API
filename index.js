@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { userRouter } = require("./routes/user.routes.js");
 const { errorHandler } = require("./middlewares/error.middleware.js");
+const { productRouter } = require("./routes/product.routes.js");
 
 const main = async () => {
   // Conexión a la BBDD
@@ -38,6 +39,7 @@ const main = async () => {
     res.status(404).send("Lo sentimos :( No hemos encontrado la página solicitada.");
   });
 
+  app.use("/product", productRouter)
   app.use("/user", userRouter)
   app.use("/", router);
 

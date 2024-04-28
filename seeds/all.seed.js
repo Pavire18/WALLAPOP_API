@@ -48,7 +48,7 @@ async function populateBBDD() {
     });
 
     // CHATS
-    const chatDocuments = chatList.map((chat) => new Sale(chat));
+    const chatDocuments = chatList.map((chat) => new Chat(chat));
 
     chatDocuments.forEach((chat) => {
       chat.user1 = userDocuments[randomNumber(0, userDocuments.length - 1)]._id;
