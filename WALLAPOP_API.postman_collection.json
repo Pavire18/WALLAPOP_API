@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "89117785-f616-4ef7-9cad-8ca0547c2fcd",
+		"name": "WALLAPOP_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "13299843"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "GET Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user?page=1&limit=20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/user/661a46f5cd25bbb9b642fd6c"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjJjYzQ4M2RmMGJiMTk0ODI4NTc5N2YiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE0MjEzMTQxLCJleHAiOjE3MTQyOTk1NDF9.gvwWoB59a91OTQsHMInN41CyEauZo36G5yrDU9s6e04"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/user/662cc483df0bb19482857980"
+					},
+					"response": []
+				},
+				{
+					"name": "POST User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pablo\",\r\n    \"surNames\": \"Villarino Redondo\",\r\n    \"email\": \"prueba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "POST User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "email",
+								"value": "pavire@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"pavire@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"PRUEBA UPDATE\",\r\n    \"surNames\": \"PRUEBA UPDATE\",\r\n    \"email\": \"prueba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/661a46f5cd25bbb9b642fd6c"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCT",
+			"item": [
+				{
+					"name": "GET Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product?page=1&limit=20&description=pantalla",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "description",
+									"value": "pantalla"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/product/662e182d5e14500c4f9fa279"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjJlMTgyZDVlMTQ1MDBjNGY5ZmEyNmYiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE0Mjk2ODgyLCJleHAiOjE3MTQzODMyODJ9.8nH-ckwA_RCBrzG7N6JUKihjL435GhZfbGToZMAEn4I"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/product/662e182d5e14500c4f9fa279"
+					},
+					"response": []
+				},
+				{
+					"name": "POST User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pablo\",\r\n    \"surNames\": \"Villarino Redondo\",\r\n    \"email\": \"prueba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "POST User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.32.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "email",
+								"value": "pavire@gmail.com",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"pavire@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"PRUEBA UPDATE\",\r\n    \"surNames\": \"PRUEBA UPDATE\",\r\n    \"email\": \"prueba@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/user/661a46f5cd25bbb9b642fd6c"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SALE",
+			"item": [
+				{
+					"name": "GET Sale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sale?page=1&limit=20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sale"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Sale by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/product/662e182d5e14500c4f9fa279"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Sale by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjJlMTgyZDVlMTQ1MDBjNGY5ZmEyNmYiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE0Mjk2ODgyLCJleHAiOjE3MTQzODMyODJ9.8nH-ckwA_RCBrzG7N6JUKihjL435GhZfbGToZMAEn4I"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/sale/66320eec6d425c80d1ecabb2"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Sale",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzMiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE1Mjc2OTk4LCJleHAiOjE3MTUzNjMzOTh9.ShNkRgyimpbv27qma0cKhjZApTjmWxgCPhN3fZbHkNQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seller\": \"663d0a18f4c87d248f31b933\",\r\n    \"buyer\": \"663d0a18f4c87d248f31b934\",\r\n    \"product\": \"663d0a18f4c87d248f31b941\",\r\n    \"saleDate\": \"2024-05-09T17:38:32.951+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/sale"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Sale",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzMiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE1Mjc3MjA1LCJleHAiOjE3MTUzNjM2MDV9.sSr0jtKgxiujYjsF4O9hVNhJ9HZnk2bG5khHbSG80WQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seller\": \"663d0a18f4c87d248f31b933\",\r\n    \"buyer\": \"663d0a18f4c87d248f31b934\",\r\n    \"product\": \"663d0a18f4c87d248f31b941\",\r\n    \"saleDate\": \"2024-12-09T17:38:32.951+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/sale/663d0a18f4c87d248f31b949"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CHAT",
+			"item": [
+				{
+					"name": "GET Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzYiLCJ1c2VyRW1haWwiOiJhZG1pbkBhcHAuZXMiLCJpYXQiOjE3MTUyNzc5NDMsImV4cCI6MTcxNTM2NDM0M30.tvOuFdSAaPi-0pYZnHPaKJ8U0NZpLqdMGns5ZG1K5aQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/chat?page=1&limit=20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"chat"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Chat by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzYiLCJ1c2VyRW1haWwiOiJhZG1pbkBhcHAuZXMiLCJpYXQiOjE3MTUyNzgzMjUsImV4cCI6MTcxNTM2NDcyNX0.Awi0nyW4hsTErJGvE6gR1Dw1JZ0mAv34wIXMxqTKzcI"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/chat/663d0a18f4c87d248f31b957"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Chat by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzMiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE1Mjc4NTAwLCJleHAiOjE3MTUzNjQ5MDB9.t4vuwHkXI6qvf0TwdxwA2B_HvpSi1dmZvRoesADT7Uw"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base_url}}/chat/663d0a18f4c87d248f31b95a"
+					},
+					"response": []
+				},
+				{
+					"name": "POST Chat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzMiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE1Mjc2OTk4LCJleHAiOjE3MTUzNjMzOTh9.ShNkRgyimpbv27qma0cKhjZApTjmWxgCPhN3fZbHkNQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seller\": \"663d0a18f4c87d248f31b933\",\r\n    \"buyer\": \"663d0a18f4c87d248f31b934\",\r\n    \"product\": \"663d0a18f4c87d248f31b941\",\r\n    \"saleDate\": \"2024-05-09T17:38:32.951+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/chat"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Sale",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjNkMGExOGY0Yzg3ZDI0OGYzMWI5MzMiLCJ1c2VyRW1haWwiOiJwYXZpcmVAZ21haWwuY29tIiwiaWF0IjoxNzE1Mjc3MjA1LCJleHAiOjE3MTUzNjM2MDV9.sSr0jtKgxiujYjsF4O9hVNhJ9HZnk2bG5khHbSG80WQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"seller\": \"663d0a18f4c87d248f31b933\",\r\n    \"buyer\": \"663d0a18f4c87d248f31b934\",\r\n    \"product\": \"663d0a18f4c87d248f31b941\",\r\n    \"saleDate\": \"2024-12-09T17:38:32.951+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/chat/663d0a18f4c87d248f31b949"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}

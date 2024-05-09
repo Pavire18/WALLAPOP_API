@@ -19,7 +19,6 @@ async function populateBBDD() {
     await Product.collection.drop();
     await Sale.collection.drop();
     await Chat.collection.drop();
-    console.log("Usuarios eliminados");
 
     // USERS
     const userDocuments = userList.map((user) => new User(user));

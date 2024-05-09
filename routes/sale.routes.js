@@ -1,25 +1,11 @@
 const express = require("express");
 
 // Modelos
-const { Product } = require("../models/Product.js");
+const { Sale } = require("../models/Sale.js");
 const { isAuth } = require("../middlewares/auth.middleware.js");
+const { Product } = require("../models/Product.js");
 
 const router = express.Router();
-
-const checkParams = (req) => {
-  const query = {};
-
-  const { title, description } = req.query;
-  if (title) {
-    query.title = title;
-  }
-
-  if (description) {
-    query.description = description;
-  }
-
-  return query;
-};
 
 router.get("/", (req, res, next) => {
   const page = req.query.page ? parseInt(req.query.page) : 1;
@@ -39,14 +25,13 @@ router.get("/", (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const { page, limit } = req.query;
-    const query = checkParams(req);
 
-    const products = await Product.find({ title: new RegExp(query.title, "i"), description: new RegExp(query.description, "i") })
+    const products = await Sale.find()
       .limit(limit)
       .skip((page - 1) * limit)
-      .populate("owner");
+      .populate([{ path: "seller" }, { path: "buyer" }, { path: "product" }]);
 
-    const totalElements = await Product.countDocuments();
+    const totalElements = await Sale.countDocuments();
 
     const response = {
       totalItems: totalElements,
@@ -54,7 +39,6 @@ router.get("/", async (req, res, next) => {
       currentPage: page,
       data: products,
     };
-    console.log(products);
 
     res.json(response);
   } catch (error) {
@@ -65,9 +49,9 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const product = await Product.findById(id).populate("owner");
-    if (product) {
-      res.json(product);
+    const sale = await Sale.findById(id).populate([{ path: "seller" }, { path: "buyer" }, { path: "product" }]);
+    if (sale) {
+      res.json(sale);
     } else {
       res.status(404).json({});
     }
@@ -78,19 +62,25 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/", isAuth, async (req, res, next) => {
   try {
-    const bodyProduct = new Product(req.body);
-    let createdProduc = null;
+    const bodySale = new Sale(req.body);
 
-    if (bodyProduct) {
-      // COMPROBACIÓN PARA QUE SOLO EL OWNER DEL PRODUCTO LO PUEDA CREAR
-      if (req.user.id === bodyProduct.owner._id.toString() || req.user.email === "admin@app.es") {
-        createdProduc = await bodyProduct.save();
+    const product = await Product.findById(bodySale.product._id.toString());
+    let createdSale = null;
+
+    if (bodySale && product) {
+      // COMPROBACIÓN PARA QUE SOLO EL SELLER DEL PRODUCTO LO PUEDA CREAR
+      if (req.user.id === bodySale.seller._id.toString() || req.user.email === "admin@app.es") {
+        if (!product.sold) {
+          createdSale = await bodySale.save();
+        } else {
+          return res.status(401).json({ error: "El producto ya está vendido" });
+        }
       } else {
         return res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       }
 
-      if (createdProduc) {
-        return res.status(201).json(createdProduc);
+      if (createdSale) {
+        return res.status(201).json(createdSale);
       } else {
         res.status(404).json({});
       }
@@ -105,19 +95,19 @@ router.post("/", isAuth, async (req, res, next) => {
 router.delete("/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const product = await Product.findById(id);
-    let productDeleted = null;
+    const sale = await Sale.findById(id);
+    let saleDeleted = null;
 
-    if (product) {
-      // COMPROBACIÓN PARA QUE SOLO EL OWNER DEL PRODUCTO LO PUEDA ELIMINAR
-      if (req.user.id === product.owner._id.toString() || req.user.email === "admin@app.es") {
-        productDeleted = await Product.findByIdAndDelete(id);
+    if (sale) {
+      // COMPROBACIÓN PARA QUE SOLO EL SELLER DEL PRODUCTO LO PUEDA ELIMINAR
+      if (req.user.id === sale.seller._id.toString() || req.user.email === "admin@app.es") {
+        saleDeleted = await Sale.findByIdAndDelete(id);
       } else {
         return res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       }
 
-      if (productDeleted) {
-        res.json(productDeleted);
+      if (saleDeleted) {
+        res.json(saleDeleted);
       } else {
         res.status(404).json({});
       }
@@ -130,19 +120,19 @@ router.delete("/:id", isAuth, async (req, res, next) => {
 router.put("/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const product = await Product.findById(id);
-    let productUpdated = null;
+    const sale = await Sale.findById(id);
+    let saleUpdated = null;
 
-    if (product) {
-      // COMPROBACIÓN PARA QUE SOLO EL OWNER DEL PRODUCTO LO PUEDA MODIFICAR
-      if (req.user.id === product.owner._id.toString() || req.user.email === "admin@app.es") {
-        productUpdated = await Product.findByIdAndUpdate(id, req.body, { new: true });
+    if (sale) {
+      // COMPROBACIÓN PARA QUE SOLO EL SELLER DEL PRODUCTO LO PUEDA MODIFICAR
+      if (req.user.id === sale.seller._id.toString() || req.user.email === "admin@app.es") {
+        saleUpdated = await Sale.findByIdAndUpdate(id, req.body, { new: true });
       } else {
         return res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       }
 
-      if (productUpdated) {
-        res.json(productUpdated);
+      if (saleUpdated) {
+        res.json(saleUpdated);
       } else {
         res.status(404).json({});
       }
@@ -152,4 +142,4 @@ router.put("/:id", isAuth, async (req, res, next) => {
   }
 });
 
-module.exports = { productRouter: router };
+module.exports = { saleRouter: router };
